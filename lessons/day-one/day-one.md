@@ -13,7 +13,7 @@ We'll need a working area to store files as we go. Create a new folder (director
 
 Copy the code below into a file named `index.html` in your working area. We use an HTML file simply to organize and load JavaScript files in the browser. The name doesn't matter, but `index.html` is the convention.
 
-```
+```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,12 +25,12 @@ Copy the code below into a file named `index.html` in your working area. We use 
 </html>
 ```
 
-Examples of all code in this course are available in the Github (repo)[https://github.com/devdemystified/intro-to-programming/] under lessons > each day > code. It is strongly recommended you input the code as you go, to get the feel for the programming process, but feel free to reference those files if you have a problem. 
+Examples of all code in this course are available in the Github [repo](https://github.com/devdemystified/intro-to-programming/) under lessons > each day > code. It is strongly recommended you input the code as you go, to get the feel for the programming process, but feel free to reference those files if you have a problem. 
 
 Create another file, `ttt.js`, in the same directory (we'll use 'ttt' throughout as an abbreviation for "tic-tac-toe"). 
 
 Save the file with this content:
-```
+```javascript
 let ttt;
 ```
 `let` is one of several javascript keywords that declares a new variable. All variables are placeholders in run-time memory where we can store data.
@@ -78,7 +78,7 @@ Notice that "complicated" is not a quality of a good tests. Numerous small, simp
 
 ## Our first test
 In `index.html`, add another script tag after the first one:
-```
+```html
   <head>
     <script src="ttt.js"></script>
     <script src="test.js"></script>
@@ -86,7 +86,7 @@ In `index.html`, add another script tag after the first one:
 ```
 
 Create file `test.js` in the same folder with this content:
-```
+```javascript
 console.log("ttt defined", ttt !== undefined);
 ```
 
@@ -104,7 +104,7 @@ Pro tip: any of these expressions can be executed in the same Dev Tools window w
 
 ## Fail first, then pass
 In `ttt.js`, let's assign a value to `ttt`:
-```
+```javascript
 let ttt = {};
 ```
 `let ttt` declares the variable, reserving space for it in memory. Variables can (and usually should) be assigned a value at the time they're created. 
