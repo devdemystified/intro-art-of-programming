@@ -24,6 +24,7 @@ Copy the code below into a file named `index.html` in your working area. We use 
   </body>
 </html>
 ```
+
 Examples of all code in this course are available in the Github (repo)[https://github.com/devdemystified/intro-to-programming/] under lessons > each day > code. It is strongly recommended you input the code as you go, to get the feel for the programming process, but feel free to reference those files if you have a problem. 
 
 Create another file, `ttt.js`, in the same directory (we'll use 'ttt' throughout as an abbreviation for "tic-tac-toe"). 
