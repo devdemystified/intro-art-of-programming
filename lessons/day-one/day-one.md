@@ -70,8 +70,8 @@ To ensure our software works, we test. At first it's okay to perform manual test
 
 Our smoke test has demonstrated several qualities of good tests:
 - deterministic: the same input always produces the same output.
-- singular/focused: only test one condition at a time.
-- isolated: other test conditions don't affect this one. 
+- isolated: only test one condition at a time.
+- independent: other test conditions don't affect this one. 
 - reproduceable: the environment can be manipulated so a test passes or fails on demand.
 
 Notice that "complicated" is not a quality of a good tests. Numerous small, simple tests are much better than one big messy one. 
