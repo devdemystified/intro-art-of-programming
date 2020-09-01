@@ -94,7 +94,9 @@ console.log("ttt defined", ttt !== undefined);
 
 We pass in the text "ttt defined" (in quotes) as the first parameter. This labels the output, but more importantly, something will still be printed in case the second parameter is empty. An empty log message is worse than useless because it adds noise to the test results, but can be super difficult to track down and remove. 
 
-In the second parameter we compare the current value of the _variable_ `ttt` (no quotes) using the negative comparison operator, `!==`. JavaScript operators take their left and right hand values and perform some operation using them. In this case, the operator will return `true` or `false` depending on whether the values do _not_ match (the exclamation point means "negation" in many places in JavaScript). Since we didn't assign a value when we declared `let ttt`, `ttt` will match `undefined`. The operator will therefore return `false`.
+In the second parameter we compare the current value of the _variable_ `ttt` (no quotes) using the negative comparison operator, `!==`. JavaScript operators take their left and right hand values and perform some operation using them. In this case, the operator will return `true` or `false` depending on whether the values do _not_ match (the exclamation point means "negation" in many places in JavaScript).
+
+`undefined` is a native JavaScript value representing the lack of a value. Since we didn't assign a value when we declared `let ttt`, `ttt` will match `undefined`. The operator will therefore return `false`.
 
 Simple tests like this add value by reducing the time you spend investigating. If all our other feature tests fail but this one does not, we know there's a different category of problem without having to go look manually.
 
