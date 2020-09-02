@@ -90,7 +90,7 @@ Create file `test.js` in the same folder with this content:
 console.log("ttt defined", ttt !== undefined);
 ```
 
-`console` is an object the browser provides that organizes communication. `log` is a function that prints data where the user can see it. More on objects and functions to come. 
+`console` is an object the browser provides that organizes communication. Objects are collections of properties, which can be referred to following a `.`. `log` is a function that prints data where the user can see it. More on objects and functions to come.
 
 We pass in the text "ttt defined" (in quotes) as the first parameter. This labels the output, but more importantly, something will still be printed in case the second parameter is empty. An empty log message is worse than useless because it adds noise to the test results, but can be super difficult to track down and remove. 
 
