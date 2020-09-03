@@ -1,4 +1,4 @@
-# Day one
+# Lesson one
 1. Setup our environment
 1. Data safety
 1. Perform a "smoke test"
