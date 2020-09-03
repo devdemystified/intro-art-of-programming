@@ -44,7 +44,7 @@ Curly brackets create a new object. If you reference a variable inside the brack
 
 Save the file and verify the test changes to `true`.
 
-## Refactor
+### Refactor
 To "refactor" means to change _how_ the code works, without changing _what_ it does. In other words, once the test is written, you should re-write the code as many times as you see fit, until it's as good as it's gonna get.
 
 Let's refactor the code. We'll use a different syntax for adding properties to objects. 
