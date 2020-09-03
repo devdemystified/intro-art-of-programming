@@ -1,0 +1,3 @@
+let ttt = {
+  board: [],
+};
