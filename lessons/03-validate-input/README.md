@@ -8,6 +8,8 @@ We're loading a board, but we're not guaranteed our earlier tests will stay corr
 
 Certain states should never occur, and defining those unacceptable conditions allows code to focus more precisely on valid situations. We're going to use JavaScript errors to correct this. We have bad associations with seeing computer errors, but the ones we see are "unhandled" errors. Using errors intentionally helps to produce solid code elsewhere. 
 
+Fun stuff: comic showing why any interface should [validate its inputs](https://xkcd.com/327/)
+
 Terminology: errors get "thrown", and are then "handled" elsewhere. The keywords associated with this are `try` and `catch`. `try` wraps around the code you want to "try", and if an error is thrown, `catch` takes over. 
 
 ## Throw error if not array
