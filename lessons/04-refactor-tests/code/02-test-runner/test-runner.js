@@ -1,0 +1,1 @@
+boardTests.forEach(e => { e(); });
