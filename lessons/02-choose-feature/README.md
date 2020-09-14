@@ -11,7 +11,17 @@ To represent the board, we'll use a JavaScript data structure called an array. A
 
 Visually, a tic tac toe board is laid out in a 3x3 grid. New programmers often want to replicate that structure in program data by nesting three arrays inside one. However, this arrangement increases complexity without providing corresponding benefits.
 
-Instead, we'll use a single array of 9 elements, where each one corresponds to a square on the board (imagine the numbers on a phone keypad corresponding to each cell). This will greatly simplify operations like checking for a winner and eventually connecting the array to the browser UI.
+Instead, we'll use a single array of 9 elements, where each element corresponds to a square on the board - similar to the numbers on a phone keypad.
+```
+ 0 | 1 | 2
+ ---------
+ 3 | 4 | 5
+ ---------
+ 6 | 7 | 8
+```
+Gotcha: because _computer science reasons_, array indexes start with 0.
+
+This will greatly simplify operations like checking for a winner and eventually connecting the array to the browser UI.
 
 Pro tip: simplicity is the most important quality of software. Using a single array may seem strange at first, but the simplicity is so powerful it's worth changing your thinking.
 
