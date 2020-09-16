@@ -24,6 +24,7 @@ Copy the code below into a file named `index.html` in your working area. We use 
   </body>
 </html>
 ```
+Pro tip: anything you copy-paste you'll never learn. We'll copy-paste this code, because we don't need to discuss HTML right now. For the rest of the lessons, don't copy-paste anything. There is huge value in reading code and then typing it out yourself.
 
 Examples of all code in this course are available in the Github [repo](https://github.com/devdemystified/intro-to-programming/) under lessons > each day > code. It is strongly recommended you input the code as you go, to get the feel for the programming process, but feel free to reference those files if you have a problem. 
 
