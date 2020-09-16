@@ -14,11 +14,12 @@ let ttt = {
 
     if (!this.board) throw Error("game state requires board array");
     if (!this.board.length) return 0;
-    [
+    const winMatrix = [
       [0, 1, 2],
       [0, 3, 6],
       [0, 4, 8],
-    ].forEach(e => {
+    ];
+    winMatrix.forEach(e => {
       if (
         this.board[e[0]] === this.board[e[1]] &&
         this.board[e[1]] === this.board[e[2]]

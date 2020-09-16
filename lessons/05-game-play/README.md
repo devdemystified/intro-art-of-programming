@@ -1,12 +1,13 @@
 # Lesson Five
-1. Game Play
-1. Check game state
-1. Take turns
+1. Check game state overview
+1. Set up tests
+1. Check game across
+1. Use a loop to solve the general case
 
-## Game Play
-All the previous lesson kick into high gear here as we add game features. This lesson is longer than the others, but should go faster - we've already established all our basics and now we're doing the cool, useful stuff. 
+## Check game state overview
+All the previous lessons kick into high gear here as we add game features. This lesson and the next are longer than the others, but should go faster - we've already established all our basics and now we're doing the cool, useful stuff.
 
-First we'll create a feature that will tell us the state of the game:
+We'll create a feature that will tell us the state of the game:
 - not started
 - in progress
 - player 1 won
@@ -14,14 +15,6 @@ First we'll create a feature that will tell us the state of the game:
 - tie
 There's one more possible state, when the game is still in progress but a tie is the only possible outcome. That one is much more complicated and not required for basic game play, so we will skip it. 
 
-Once we have the game state feature, we'll create the turn-taking feature. A turn cycle has these elements:
-- set the current player
-- wait for the player to input a position
-- check that position is valid
-- mark the board at the position specified by the player
-- check the game state
-
-## Check game state
 We want a method that will examine the board and tell us whether either player has won. This is where storing the board as a single array is going to pay off. 
 
 To check, we pull out the array elements which correspond to a possible win: all three cells in the top row, middle, row, bottom row; same for the three columns, and finally the two diagonals. Then for each possible win, we simply loop through the cell elements and compare the values. If at any point, they are all the same (all one player), we can stop looking.
@@ -30,8 +23,8 @@ Novice developers often try to solve this problem without a loop.  Instead they 
 
 As an algorithm gets more complicated, the one-shot solution gets twice as hard to manage. Loops have tremendous power in programming because whatever the final intended action, you only have to enter it once. Imagine if you wanted to change how the board stored marked positions - using the loop method, only one line would need changing.
 
-### Another smoke test
-We're going to repeat our testing process for the new features. First, a smoke test.
+## Set up tests
+We're going to repeat our testing process for the new features. First, a smoke test for the method.
 `smoke-tests.js`
 ```javascript
 ...
@@ -156,7 +149,7 @@ Pro tip: two other reasons to use named functions as object methods:
 - JavaScript compilers can use the function's to optimize for performance
 - having the name displayed in various debugging tools really helps
 
-### Check across
+## Check across
 Remember the keypad concept? That's how we'll check if there's a winner.
 ```
  0 | 1 | 2
@@ -239,8 +232,8 @@ It's not a win unless all three cells match. If they all match, any of them can 
 
 The "and" operator, `&&`, joins together the result of two boolean expressions. It returns `true` if both of its arguments are `true`. Related operator "or", `||` is two "pipe" characters (shift + backslash on the keyboard).
 
-### The general case
-The "general" case means the solution that can handle all the various combinations: three rows, three columns, two diagonals. We're going to keep the code short by using a loop.
+## Loop to solve the general case
+The "general" case means considering all the various combinations: three rows, three columns, two diagonals. We're going to keep the code short by using a loop.
 
 Let's start by refactoring what we have already:
 `ttt.js`
@@ -250,21 +243,36 @@ Let's start by refactoring what we have already:
 
     if (!this.board) throw Error("game state requires board array");
     if (!this.board.length) return 0;
-    [
+
+    const topRow = [0, 1, 2];
+    if (
+      this.board[topRow[0]] === this.board[topRow[1]] &&
+      this.board[topRow[1]] === this.board[topRow[2]]
+    ) { 
+      gameState = this.board[0]; 
+    }
+    
+    return gameState;
+  },
+```
+In this refactor, we've replaced the hardcoded board indexes with a variable. Right now there's only one value for the variable. Next we'll add multiple values, representing multiple directions.
+
+To support multiple values, we'll use another array to store them. We can set up the loop with just one value in the matrix:
+`ttt.js`
+```javascript
+    const winMatrix = [
       [0, 1, 2],
-    ].forEach(e => {
+    ];
+    winMatrix.forEach(e => {
       if (
-        this.board[e[0]] === this.board[e[1]] &&
-        this.board[e[1]] === this.board[e[2]]
+        this.board[winMatrix[0]] === this.board[winMatrix[1]] &&
+        this.board[winMatrix[1]] === this.board[winMatrix[2]]
       ) { 
         gameState = this.board[0]; 
       }
     });
-    return gameState;
-  },
 ```
-Instead of writing `this.board` repeatedly with different indexes hardcoded, we're going to loop through a list of directions and use the list contents in the `if` condition. The big advantage is we can add the directions to the list, but we don't have to write more `if` conditions.
-
+Let's write a test to force us to handle a win other than the top row. 
 `state-tests.js`
 ```javascript
   ()=>{
@@ -282,10 +290,10 @@ Making it pass is super simple:
 
 `ttt.js`
 ```javascript
-    [
+    const winMatrix = [
       [0, 1, 2],
       [0, 3, 6],
-    ].forEach(e => {
+    ];
 ```
 
 Diagonal:
@@ -307,12 +315,15 @@ And pass.
 
 `ttt.js`
 ```javascript
-    [
+    const winMatrix = [
       [0, 1, 2],
       [0, 3, 6],
       [0, 4, 8],
-    ].forEach(e => {
+    ];
 ```
+Terminology: what we've done here is called "abstraction". To abstract is to separate what is different from what is the same. Different directions in which to search; same condition to determine if the direction-values are a win.
+
+Pro tip: abstraction can be very powerful, but there's a cost to clarity. Literal code is much easier to understand, and code must be understood before maintenance and extension. Choosing the balance between power and clarity is part of the art of programming. 
 
 Exercise for you: add test cases for the other rows, columns and diagonals. Fail first, then add array elements to make it pass.
 
