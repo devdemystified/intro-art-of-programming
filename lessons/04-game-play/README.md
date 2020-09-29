@@ -1,4 +1,4 @@
-# Lesson Five
+# Lesson Four
 1. Check game state overview
 1. Set up tests
 1. Check game across
@@ -13,9 +13,9 @@ We'll create a feature that will tell us the state of the game:
 - player 1 won
 - player 2 won
 - tie
-There's one more possible state, when the game is still in progress but a tie is the only possible outcome. That one is much more complicated and not required for basic game play, so we will skip it. 
+There's one more possible state, when the game is still in progress but a tie is the only possible outcome. That one is much more complicated and not required for basic game play, so we will skip it.
 
-We want a method that will examine the board and tell us whether either player has won. This is where storing the board as a single array is going to pay off. 
+We want a method that will examine the board and tell us whether either player has won. This is where storing the board as a single array is going to pay off.
 
 To check, we pull out the array elements which correspond to a possible win: all three cells in the top row, middle, row, bottom row; same for the three columns, and finally the two diagonals. Then for each possible win, we simply loop through the cell elements and compare the values. If at any point, they are all the same (all one player), we can stop looking.
 
@@ -43,9 +43,9 @@ Here we just make sure the method returns _something_.
 ```html
     <script src="smoke-tests.js"></script>
 ```
-Note the file name changed to `tests`, plural. File names need to accurately reflect their content, just like variable names. This may seem trivial, but it's the kind of thing you'll forget which will drive you bonkers later. 
+Note the file name changed to `tests`, plural. File names need to accurately reflect their content, just like variable names. This may seem trivial, but it's the kind of thing you'll forget which will drive you bonkers later.
 
-Pro tip: Remember, you're writing code for another person to read. That person is trying to figure out how you arranged the code, and only has the clues you leave to go by. That person may be _future_-you! I have a great memory but still forget how my old code was supposed to work. 
+Pro tip: Remember, you're writing code for another person to read. That person is trying to figure out how you arranged the code, and only has the clues you leave to go by. That person may be _future_-you! I have a great memory but still forget how my old code was supposed to work.
 
 The variable names in the test file and the test runner have to match.
 `test-runner.js`
@@ -53,7 +53,7 @@ The variable names in the test file and the test runner have to match.
 [
   smokeTests,
   boardTests,
-].forEach(eachTestSuite => { 
+].forEach(eachTestSuite => {
 ```
 
 ### Make it pass
@@ -67,7 +67,7 @@ let ttt = {
   loadBoard,
 };
 ```
-Confirm the tests pass. 
+Confirm the tests pass.
 
 ### Another test suite
 We'll add a new file for all the game state tests. For the first test, we'll check the empty board.
@@ -86,7 +86,7 @@ const stateTests = [
   },
 ];
 ```
-Make it pass: 
+Make it pass:
 `ttt.js`
 ```javascript
   gameState: ()=> 0,
@@ -96,7 +96,7 @@ Pro tip: We know, separate from this code, that `ttt.board` starts out with an e
 - what `ttt` starts out with could change.
 - it documents an assumption, which is that `gameState` expects a board.
 
-Since we're expecting a value, we should enforce it with a thrown error. We don't need to test the error every time - if you configure an error condition and then trigger it, all you've really demonstrated is that JavaScript error handling works. 
+Since we're expecting a value, we should enforce it with a thrown error. We don't need to test the error every time - if you configure an error condition and then trigger it, all you've really demonstrated is that JavaScript error handling works.
 `ttt.js`
 ```javascript
   gameState: ()=> {
@@ -105,22 +105,22 @@ Since we're expecting a value, we should enforce it with a thrown error. We don'
   },
 ```
 
-Add the file to the page. 
+Add the file to the page.
 `index.html`
 ```html
     <script src="state-tests.js"></script>
 ```
 
-Add it in the test runner too. 
+Add it in the test runner too.
 `test-runner.js`
 ```javascript
 [
   smokeTests,
   boardTests,
   stateTests,
-].forEach(eachTestSuite => { 
+].forEach(eachTestSuite => {
 ```
-Pro tip: On a real project, a 3rd party tool would handle this syncing automatically. When you have dozens or hundreds of test files, automation is not optional. However automation introduces problems of its own, one of which is reducing clarity. We're handling the sync manually to expose the basic mechanisms at work. 
+Pro tip: On a real project, a 3rd party tool would handle this syncing automatically. When you have dozens or hundreds of test files, automation is not optional. However automation introduces problems of its own, one of which is reducing clarity. We're handling the sync manually to expose the basic mechanisms at work.
 
 At this point you should have a failing test for "empty board returns 0". We can make it pass with placeholder code:
 
@@ -131,7 +131,7 @@ At this point you should have a failing test for "empty board returns 0". We can
 
 It's a good idea to enforce validation here too. We already have a test that guarantees the board will be an array, but we aren't guaranteed that a board will have been loaded at the time `gameState` gets called.
 
-Not having a board should be outside of the acceptable operation of `gameState`, so we'll throw an error. 
+Not having a board should be outside of the acceptable operation of `gameState`, so we'll throw an error.
 
 `ttt.js`
 ```javascript
@@ -143,7 +143,7 @@ Not having a board should be outside of the acceptable operation of `gameState`,
 ```
 We're declaring an object property named `gameState`. Then we're declaring a named function and assigning it as the value. The name comes after the `function` keyword and has the same basic naming rules as variables.
 
-Gotcha: an arrow function will not work here(try it!). Arrow functions treat `this` slightly differently. Instead of the object they're attached to, `this` will point at the object representing the function in which they were created. Since we didn't put a function around the `gameState` code, it points at the global function, `Window`. Note that functions are objects - if you manually added `Window.board` the code would work again. 
+Gotcha: an arrow function will not work here(try it!). Arrow functions treat `this` slightly differently. Instead of the object they're attached to, `this` will point at the object representing the function in which they were created. Since we didn't put a function around the `gameState` code, it points at the global function, `Window`. Note that functions are objects - if you manually added `Window.board` the code would work again.
 
 Pro tip: two other reasons to use named functions as object methods:
 - JavaScript compilers can use the function's to optimize for performance
@@ -195,12 +195,12 @@ Note we're referencing a specific array value in the return statement, by puttin
 
 `this.board` is an array, and arrays have properties, because they're a subtype of objects. In fact, almost everything in JavaScript can be treated as objects.
 
-Gotcha: object properties are not guaranteed to be consistent between types. An array's `length` property tells you how many elements it contains, a string's `length` property tells you how many characters it has (`"hey".length === 3`), but a function's `length` property tells how many arguments it takes. 
+Gotcha: object properties are not guaranteed to be consistent between types. An array's `length` property tells you how many elements it contains, a string's `length` property tells you how many characters it has (`"hey".length === 3`), but a function's `length` property tells how many arguments it takes.
 
 Pro tip: the one method all objects share is `toString`. This method defines how the object represents itself as text, like when it's passed to `console.log`.
 
 ### Make it meaningful
-Right now our placeholder code passes. Let's put it in a test that will force us to write meaningful code. If we try to detect a mixed state - a game in progress but not yet won - it will "paint us in a corner" where we'll have to write functional code. 
+Right now our placeholder code passes. Let's put it in a test that will force us to write meaningful code. If we try to detect a mixed state - a game in progress but not yet won - it will "paint us in a corner" where we'll have to write functional code.
 
 `state-tests.js`
 ```javascript
@@ -223,8 +223,8 @@ Placeholder code can't pass all these tests at once. But, we still don't yet hav
     if (
       this.board[0] === this.board[1] &&
       this.board[1] === this.board[2]
-    ) { 
-      return this.board[0]; 
+    ) {
+      return this.board[0];
     }
     return 0;
 ```
@@ -248,10 +248,10 @@ Let's start by refactoring what we have already:
     if (
       this.board[topRow[0]] === this.board[topRow[1]] &&
       this.board[topRow[1]] === this.board[topRow[2]]
-    ) { 
-      gameState = this.board[0]; 
+    ) {
+      gameState = this.board[0];
     }
-    
+
     return gameState;
   },
 ```
@@ -267,12 +267,12 @@ To support multiple values, we'll use another array to store them. We can set up
       if (
         this.board[winMatrix[0]] === this.board[winMatrix[1]] &&
         this.board[winMatrix[1]] === this.board[winMatrix[2]]
-      ) { 
-        gameState = this.board[0]; 
+      ) {
+        gameState = this.board[0];
       }
     });
 ```
-Let's write a test to force us to handle a win other than the top row. 
+Let's write a test to force us to handle a win other than the top row.
 `state-tests.js`
 ```javascript
   ()=>{
@@ -323,8 +323,6 @@ And pass.
 ```
 Terminology: what we've done here is called "abstraction". To abstract is to separate what is different from what is the same. Different directions in which to search; same condition to determine if the direction-values are a win.
 
-Pro tip: abstraction can be very powerful, but there's a cost to clarity. Literal code is much easier to understand, and code must be understood before maintenance and extension. Choosing the balance between power and clarity is part of the art of programming. 
+Pro tip: abstraction can be very powerful, but there's a cost to clarity. Literal code is much easier to understand, and code must be understood before maintenance and extension. Choosing the balance between power and clarity is part of the art of programming.
 
 Exercise for you: add test cases for the other rows, columns and diagonals. Fail first, then add array elements to make it pass.
-
-

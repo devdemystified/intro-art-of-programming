@@ -1,10 +1,14 @@
 # Lesson one
+1. What are we doing here?
 1. Setup our environment
 1. Data safety
 1. Perform a "smoke test"
 1. About good tests
 1. Our first test
 1. Fail first, then pass
+
+## What are we doing here?
+We're learning programming. We're going to build a minimalist tic-tac-toe game, illustrating programming principles along the way.
 
 ## Setup our environment
 For this course, we'll be using JavaScript inside the browser. The instructions are written specifically for Google Chrome. If you don't want to use Chrome, the code will work in any modern browser, but the menus and commands for the development tools will be slightly different.

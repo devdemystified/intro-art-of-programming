@@ -1,30 +1,30 @@
-# Lesson Four
+# Lesson Three
 1. Refactor to manage complexity
 1. Separate test content from execution
 1. Don't repeat yourself
 
 ## Refactor to manage complexity
 We've got tests going good. However we're starting to see some problems:
-- duplication: we're calling `console.log` over and over. 
-- organization: this one file will get huge and unmanagable. 
+- duplication: we're calling `console.log` over and over.
+- organization: this one file will get huge and unmanagable.
 - containment: all the tests share the same environment.
 
 Software development consists of two activities: translating features into code, and managing complexity. The second half often gets ignored, but at the project's peril! Managing complexity is half the work.
 
 When you manage complexity, the most common task you do is refactoring. To refactor is to change how the code works internally, without changing the inputs or outputs. Think of how a business might improve its internal process in such a way that customers don't have change how they order and receive.
 
-We're going to refactor our tests into two files: the labels and conditions in one, the condition execution and output printing in another. 
+We're going to refactor our tests into two files: the labels and conditions in one, the condition execution and output printing in another.
 
 We don't have to write tests for a refactor, because by definition, _what_ the code does hasn't changed, only _how_ it does it. We do still have to verify tests "switch" on and off though.
 
 ### Loop tests
 This refactor will be a multi-step process. First, let's put all the tests in an array, and loop through them.
 
-In `test.js`: 
-- wrap an array around everything 
+In `test.js`:
+- wrap an array around everything
 - wrap each test in an arrow function
 - put a comma between each arrow function (because they're array elements)
-- add a `forEach` method at the end of the array 
+- add a `forEach` method at the end of the array
 - execute each function inside the `forEach`
 
 ```javascript
@@ -52,7 +52,7 @@ Notice that `e` is each array element, which are functions. Therefore we can cal
 This is a refactor, so if you changed the code successfully, you won't see any change in the output. Beware you don't trick yourself into a false sense of security! Change one of the test's data to confirm it still fails.
 
 ## Separate test content from running
-Let's split up the tests from the code that runs the tests. The latter is a common tool, referred to by the highly technical name, "test runner". 
+Let's split up the tests from the code that runs the tests. The latter is a common tool, referred to by the highly technical name, "test runner".
 
 `index.html`
 ```html
@@ -80,7 +80,7 @@ boardTests.forEach(e => { e(); });
 Another refactor - again, make sure it works by changing something and observing the output.
 
 ### Multiple files
-In the next lesson, we'll want to put all the "take turn" tests into their own file. Let's get ready by moving the smoke test ("ttt defined") out of the board tests. 
+In the next lesson, we'll want to put all the "take turn" tests into their own file. Let's get ready by moving the smoke test ("ttt defined") out of the board tests.
 
 `index.html`
 ```html
@@ -140,7 +140,7 @@ const smokeTests = [
 ```
 In the tests, `console.log` turns into a `return` followed by an object.
 
-See if you can convert `board-tests.js` without looking first. 
+See if you can convert `board-tests.js` without looking first.
 
 ## Fails need to be obvious
 As we add more tests, it's too easy for a failure to go unnoticed among all the success. In order to get the most benefit from automated testing, you want to know immediately when a test has failed. Noticing a failure after you've spent 20 minutes writing other code is totally counter-productive.
@@ -168,14 +168,14 @@ Let's add escape sequences to make the console output turn red on failure.
     }
     console.log(
       regularColor,
-      result.label, 
+      result.label,
       true
     );
   });
 ```
-`errorColor` and `regularColor` are the escape sequences. 
+`errorColor` and `regularColor` are the escape sequences.
 
-We call `result.expression()` once. Based on the result, we already know if the test has passed or failed. We can write `true` and `false` directly in ("hardcode") instead of calling again. 
+We call `result.expression()` once. Based on the result, we already know if the test has passed or failed. We can write `true` and `false` directly in ("hardcode") instead of calling again.
 
 Changing the color in the console only lasts for the next argument, so to make false red, we have to join them together.
 
